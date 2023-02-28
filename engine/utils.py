@@ -564,20 +564,25 @@ def dump_pod_tokens(name, namespace, read_token_from_container=False):
 
     return pod_with_tokens
 
+def search_subject_in_subjects(rolebinding):
+    subjects_found = []
+    for subject in rolebinding.subjects:
+        subjects_found.append(subject)
+    return subjects_found
+
 # It get all subjects with roles.
 def get_all_subjects_with_roles():
     subjects_found = []
+    found = []
     rolebindings = api_client.RbacAuthorizationV1Api.list_role_binding_for_all_namespaces()
     clusterrolebindings = api_client.api_temp.list_cluster_role_binding()
-    for obj in rolebindings.items:
-        if obj.subjects is not None:
-            for subject in obj.subjects:
-                subjects_found += [subject.kind, subject.namespace, subject.name, obj.role_ref.name, 'RoleBinding', obj.metadata.name]
+    for rolebinding in rolebindings.items:
+        if rolebinding.subjects is not None:
+            subjects_found +=  search_subject_in_subjects(rolebinding)
 
-    for obj in clusterrolebindings:
-        if obj.subjects is not None:
-            for subject in obj.subjects:
-                subjects_found += [subject.kind, subject.namespace, subject.name, obj.role_ref.name, 'ClusterRoleBinding', obj.metadata.name]
+    for clusterrolebinding in clusterrolebindings:
+        if clusterrolebinding.subjects is not None:
+            subjects_found +=  search_subject_in_subjects(clusterrolebinding)
 
     return subjects_found
 
@@ -600,7 +605,7 @@ def get_subjects_by_kind(kind):
     for clusterrolebinding in clusterrolebindings:
         if clusterrolebinding.subjects is not None:
             subjects_found += search_subject_in_subjects_by_kind(clusterrolebinding.subjects, kind)
-
+    print(subjects_found)
     return remove_duplicated_subjects(subjects_found)
 
 
