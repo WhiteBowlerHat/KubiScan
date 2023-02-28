@@ -564,9 +564,13 @@ def dump_pod_tokens(name, namespace, read_token_from_container=False):
 
     return pod_with_tokens
 
-def search_subject_in_subjects(rolebinding):
+def search_subject_in_subjects(rolebinding, bindingkind):
     subjects_found = []
     for subject in rolebinding.subjects:
+	subject["RoleName"] = rolebinding.role_ref.name
+	subject["RoleKind"] = rolebinding.role_ref.kind
+	subject["BindingName"] = rolebinding.metadata.name
+	subject["BindingKind"] = bindingkind
         subjects_found.append(subject)
     return subjects_found
 
@@ -578,11 +582,11 @@ def get_all_subjects_with_roles():
     clusterrolebindings = api_client.api_temp.list_cluster_role_binding()
     for rolebinding in rolebindings.items:
         if rolebinding.subjects is not None:
-            subjects_found +=  search_subject_in_subjects(rolebinding)
+            subjects_found +=  search_subject_in_subjects(rolebinding,'RoleBinding')
 
     for clusterrolebinding in clusterrolebindings:
         if clusterrolebinding.subjects is not None:
-            subjects_found +=  search_subject_in_subjects(clusterrolebinding)
+            subjects_found +=  search_subject_in_subjects(clusterrolebinding,'ClusterRoleBinding)
 
     return subjects_found
 
