@@ -572,7 +572,7 @@ def search_subject_in_subjects(rolebinding, bindingkind):
         t_subject["rolekind"] = rolebinding.role_ref.kind
         t_subject["bindingname"] = rolebinding.metadata.name
         t_subject["bindingkind"] = bindingkind
-	t_subject["bindingnamespace"] = rolebinding.metadata.namespace
+        t_subject["bindingnamespace"] = rolebinding.metadata.namespace
         t_subject["kind"] = subject.kind
         t_subject["name"] = subject.name
         t_subject["namespace"] = subject.namespace
