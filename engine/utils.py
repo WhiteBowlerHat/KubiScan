@@ -110,7 +110,7 @@ def is_risky_role_with_risk(role):
         if are_rules_contain_other_rules(role.metadata.name, role.rules, risky_role.rules):
             is_risky = True
             priority = risky_role.priority
-	    risk = riskyrole.risk
+            risk = risky_role.risk
             break
 
     return is_risky, priority, risk
