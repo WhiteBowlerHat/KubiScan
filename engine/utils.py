@@ -580,12 +580,12 @@ def get_all_subjects_with_roles():
     for obj in rolebindings.items:
         if obj.subjects is not None:
             obj.kind = "Rolebinding"
-            subjects_found += [obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, obj.kind, obj.metadata.name]
+            subjects_found += [obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, 'RoleBinding', obj.metadata.name]
 
     for obj in clusterrolebindings:
         if obj.subjects is not None:
             clusterrolebinding.kind = "ClusterRolebinding"
-            obj_found += [obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, obj.kind, obj.metadata.name]
+            obj_found += [obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, 'ClusterRoleBinding', obj.metadata.name]
 
     return subjects_found
 
