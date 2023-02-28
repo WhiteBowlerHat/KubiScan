@@ -103,6 +103,19 @@ def is_risky_role(role):
 
     return is_risky, priority
 
+def is_risky_role_with_risk(role):
+    is_risky = False
+    priority = Priority.LOW
+    for risky_role in STATIC_RISKY_ROLES:
+        if are_rules_contain_other_rules(role.metadata.name, role.rules, risky_role.rules):
+            is_risky = True
+            priority = risky_role.priority
+	    risk = riskyrole.risk
+            break
+
+    return is_risky, priority, risk
+
+
 
 def find_risky_roles(roles, kind):
     risky_roles = []
@@ -577,8 +590,7 @@ def search_subject_in_subjects(rolebinding, bindingkind):
         t_subject["name"] = subject.name
         t_subject["namespace"] = subject.namespace
         requested_role = get_role_by_name_and_kind(t_subject["rolename"],t_subject["rolekind"])
-        t_subject["is_risky"], t_subject["priority"] = is_risky_role(requested_role)
-        #t_subject["risk"] = requested_role.metadata.risk
+        t_subject["is_risky"], t_subject["priority"], t_subject["risk"] = is_risky_role_with_risk(requested_role)
         subjects_found.append(t_subject)
     return subjects_found
 
