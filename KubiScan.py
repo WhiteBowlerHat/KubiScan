@@ -598,7 +598,7 @@ Requirements:
     
     args = opt.parse_args()
     
-    if args.output != "CSV"
+    if args.output != "CSV":
         print_logo()
         
     if args.examples:
