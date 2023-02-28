@@ -579,12 +579,12 @@ def get_all_subjects_with_roles():
     clusterrolebindings = api_client.api_temp.list_cluster_role_binding()
     for rolebinding in rolebindings.items:
         if rolebinding.subjects is not None:
-	    rolebinding.kind = "Rolebinding"
+            rolebinding.kind = "Rolebinding"
             subjects_found += rolebinding
 
     for clusterrolebinding in clusterrolebindings:
         if clusterrolebinding.subjects is not None:
-	    clusterrolebinding.kind = "ClusterRolebinding"
+            clusterrolebinding.kind = "ClusterRolebinding"
             subjects_found += clusterrolebinding
 
     return subjects_found
