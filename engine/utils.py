@@ -566,7 +566,7 @@ def dump_pod_tokens(name, namespace, read_token_from_container=False):
 
 def search_subject_in_subjects(rolebinding, bindingkind):
     subjects_found = []
-    t_subject = {}   
+    t_subject = {}
     for subject in rolebinding.subjects:
         t_subject["rolename"] = rolebinding.role_ref.name
         t_subject["rolekind"] = rolebinding.role_ref.kind
@@ -576,6 +576,9 @@ def search_subject_in_subjects(rolebinding, bindingkind):
         t_subject["kind"] = subject.kind
         t_subject["name"] = subject.name
         t_subject["namespace"] = subject.namespace
+        requested_role = get_role_by_name_and_kind(t_subject["rolename"],t_subject["rolekind"])
+        t_subject["is_risky"], t_subject["priority"] = is_risky_role(requested_role)
+        #t_subject["risk"] = requested_role.metadata.risk
         subjects_found.append(t_subject)
     return subjects_found
 
