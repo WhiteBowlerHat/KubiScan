@@ -586,7 +586,7 @@ def get_all_subjects_with_roles():
 
     for clusterrolebinding in clusterrolebindings:
         if clusterrolebinding.subjects is not None:
-            subjects_found +=  search_subject_in_subjects(clusterrolebinding,'ClusterRoleBinding)
+            subjects_found +=  search_subject_in_subjects(clusterrolebinding,'ClusterRoleBinding')
 
     return subjects_found
 
