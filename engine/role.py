@@ -2,13 +2,14 @@ from kubernetes import client, config
 
 # This class is also for ClusterRole
 class Role:
-    def __init__(self, name, priority, rules=None, namespace=None, kind=None, time=None):
+    def __init__(self, name, priority, rules=None, namespace=None, kind=None, time=None, risk=None):
         self.name = name
         self.priority = priority
         self.rules = rules
         self.namespace = namespace
         self.kind = kind
         self.time = time
+        self.risk = risk
 
     def get_rules(self):
         config.load_kube_config()
