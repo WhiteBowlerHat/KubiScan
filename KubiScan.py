@@ -243,13 +243,22 @@ def print_table_aligned_left(table):
 
 def print_subjects_by_kind(kind):
     subjects = engine.utils.get_subjects_by_kind(kind)
-    print('Subjects (kind: {0}) from all rolebindings:'.format(kind))
+    print('Subjects (kind: {0}) from all rolebindings and clusterrolebindings:'.format(kind))
     t = PrettyTable(['Kind', 'Namespace', 'Name'])
     for subject in subjects:
         t.add_row([subject.kind, subject.namespace, subject.name])
 
     print_table_aligned_left(t)
     print('Total number: %s' % len(subjects))
+    
+def print_all_subjects_with_roles():
+    objs = engine.utils.get_all_subjects_with_roles()
+    print('All subjects from all rolebindings and clusterrolebinding:'.format(kind))
+    t = PrettyTable(['Kind', 'Namespace', 'Name', 'RoleKind', 'RoleName' ,'BindingKind', 'BindingName'])
+    for obj in objs:
+        t.add_row([obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, obj.kind, obj.metadata.name])
+    print_table_aligned_left(t)
+   
 
 def get_pretty_rules(rules):
     pretty = ''
@@ -573,6 +582,7 @@ Requirements:
     list_subjects.add_argument('-su', '--subject-users', action='store_true', help='Get Subjects with User kind', required=False)
     list_subjects.add_argument('-sg', '--subject-groups', action='store_true', help='Get Subjects with Group kind', required=False)
     list_subjects.add_argument('-ss', '--subject-serviceaccounts', action='store_true', help='Get Subjects with ServiceAccount kind', required=False)
+    list_subjects.add_argument('-sa', '--all-subjects', action='store_true', help='Get all Subjects with roles', required=False)
 
 
     list_rules = opt.add_argument_group('List rules of RoleBinding\ClusterRoleBinding')
@@ -663,6 +673,8 @@ Requirements:
         print_subjects_by_kind(constants.GROUP_KIND)
     elif args.subject_serviceaccounts:
         print_subjects_by_kind(constants.SERVICEACCOUNT_KIND)
+    elif args.all_subjects:
+        print_all_subjects_with_roles()
     elif args.rolebinding_rules:
         if args.namespace:
             print_rolebinding_rules(args.rolebinding_rules, args.namespace)
