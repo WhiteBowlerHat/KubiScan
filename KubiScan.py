@@ -243,7 +243,7 @@ def print_table_aligned_left(table):
 
 def print_table_aligned_left_csv(table):
     table.align = 'l'
-    print(table.get_csv_string())
+    print(table.get_csv_string(delimiter=";"))
     
 def print_subjects_by_kind(kind):
     subjects = engine.utils.get_subjects_by_kind(kind)
@@ -605,7 +605,7 @@ Requirements:
         print_examples()
         exit()
 
-    api_init(kube_config_file=args.kube_config, host=args.host, token_filename=args.token_filename, cert_filename=args.cert_filename, context=args.context)
+    api_init(kube_config_file=args.kube_config, host=args.host, token_filename=args.token_filename, cert_filename=args.cert_filename, context=args.context, output=args.output)
 
     if args.risky_roles:
         print_risky_roles(show_rules=args.rules, days=args.less_than, priority=args.priority, namespace=args.namespace)
