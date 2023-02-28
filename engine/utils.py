@@ -566,12 +566,16 @@ def dump_pod_tokens(name, namespace, read_token_from_container=False):
 
 def search_subject_in_subjects(rolebinding, bindingkind):
     subjects_found = []
+    t_subject = {}   
     for subject in rolebinding.subjects:
-        subject["rolename"] = rolebinding.role_ref.name
-        subject["rolekind"] = rolebinding.role_ref.kind
-        subject["bindingname"] = rolebinding.metadata.name
-        subject["bindingkind"] = bindingkind
-        subjects_found.append(subject)
+        t_subject["rolename"] = rolebinding.role_ref.name
+        t_subject["rolekind"] = rolebinding.role_ref.kind
+        t_subject["bindingname"] = rolebinding.metadata.name
+        t_subject["bindingkind"] = bindingkind
+        t_subject["kind"] = subject.kind
+        t_subject["name"] = subject.name
+        t_subject["namespace"] = subject.namespace
+        subjects_found.append(t_subject)
     return subjects_found
 
 # It get all subjects with roles.
