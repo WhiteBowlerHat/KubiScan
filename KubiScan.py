@@ -241,6 +241,10 @@ def print_table_aligned_left(table):
     print(table)
     print('\n')
 
+def print_table_aligned_left_csv(table):
+    table.align = 'l'
+    print(table.get_csv_string())
+    
 def print_subjects_by_kind(kind):
     subjects = engine.utils.get_subjects_by_kind(kind)
     print('Subjects (kind: {0}) from all rolebindings and clusterrolebindings:'.format(kind))
@@ -545,6 +549,8 @@ Requirements:
     helper_switches.add_argument('-co', '--kube-config', action='store', metavar='KUBE_CONFIG_FILENAME',
                                  help='The kube config file.\n'
                                       'For example: ~/.kube/config', required=False)
+    
+    helper_switches.add_argument('-o', '--output', action='store', metavar='OUTPUT_NAME', help='blank or CSV', required=False)
         
     helper_switches.add_argument('-t', '--token-filename', action='store', metavar='TOKEN_FILENAME',
                                  help='A bearer token. If this token does not have the required permissions for this application,'
@@ -589,9 +595,12 @@ Requirements:
     list_rules.add_argument('-rru', '--rolebinding-rules', action='store', metavar='ROLEBINDING_NAME', help='Get rules of RoleBinding', required=False)
     list_rules.add_argument('-crru', '--clusterrolebinding-rules', action='store', metavar='CLUSTERROLEBINDING_NAME',  help='Get rules of ClusterRoleBinding',required=False)
 
-    print_logo()
+    
     args = opt.parse_args()
-
+    
+    if args.output != "CSV"
+        print_logo()
+        
     if args.examples:
         print_examples()
         exit()
