@@ -577,15 +577,15 @@ def get_all_subjects_with_roles():
     subjects_found = []
     rolebindings = api_client.RbacAuthorizationV1Api.list_role_binding_for_all_namespaces()
     clusterrolebindings = api_client.api_temp.list_cluster_role_binding()
-    for rolebinding in rolebindings.items:
-        if rolebinding.subjects is not None:
-            rolebinding.kind = "Rolebinding"
-            subjects_found += rolebinding
+    for obj in rolebindings.items:
+        if obj.subjects is not None:
+            obj.kind = "Rolebinding"
+            subjects_found += [obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, obj.kind, obj.metadata.name]
 
-    for clusterrolebinding in clusterrolebindings:
-        if clusterrolebinding.subjects is not None:
+    for obj in clusterrolebindings:
+        if obj.subjects is not None:
             clusterrolebinding.kind = "ClusterRolebinding"
-            subjects_found += clusterrolebinding
+            obj_found += [obj.subjects.kind, obj.subjects.namespace, obj.subjects.name, obj.role_ref.name, obj.kind, obj.metadata.name]
 
     return subjects_found
 
