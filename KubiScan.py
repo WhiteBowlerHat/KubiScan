@@ -252,11 +252,11 @@ def print_subjects_by_kind(kind):
     print('Total number: %s' % len(subjects))
     
 def print_all_subjects_with_roles():
-    rows = engine.utils.get_all_subjects_with_roles()
+    subjects = engine.utils.get_all_subjects_with_roles()
     print('All subjects from all rolebindings and clusterrolebinding:')
     t = PrettyTable(['Kind', 'Namespace', 'Name', 'RoleKind', 'RoleName' ,'BindingKind', 'BindingName'])
-    for row in rows:
-        t.add_row(row)
+    for subject in subjects:
+        t.add_row([subject.kind, subject.namespace, subject.name, subject.rolekind, subject.rolename, subject.bindingkind, subject.bindingname])
     print_table_aligned_left(t)
    
 
