@@ -573,7 +573,7 @@ def search_subject_in_subjects_by_kind(subjects, kind):
     return subjects_found
 
 # It get all subjects with roles.
-def get_all_subjects_with_roles(kind):
+def get_all_subjects_with_roles():
     subjects_found = []
     rolebindings = api_client.RbacAuthorizationV1Api.list_role_binding_for_all_namespaces()
     clusterrolebindings = api_client.api_temp.list_cluster_role_binding()
