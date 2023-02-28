@@ -256,7 +256,7 @@ def print_all_subjects_with_roles():
     print('All subjects from all rolebindings and clusterrolebinding:')
     t = PrettyTable(['Kind', 'Namespace', 'Name', 'RoleKind', 'RoleName' ,'BindingKind', 'BindingName'])
     for subject in subjects:
-        t.add_row([subject.kind, subject.namespace, subject.name, subject.rolekind, subject.rolename, subject.bindingkind, subject.bindingname])
+        t.add_row([subject["kind"], subject["namespace"], subject["name"], subject["rolekind"], subject["rolename"], subject["bindingkind"], subject["bindingname"]])
     print_table_aligned_left(t)
    
 
