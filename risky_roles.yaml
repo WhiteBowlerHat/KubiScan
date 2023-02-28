@@ -17,6 +17,8 @@ items:
   metadata:
     namespace: default
     name: risky-get-secrets
+    risk: "Risk: Viewing specific secrets"
+    example: kubectl get secrets <secret_name>
     priority: CRITICAL
   rules:
   - apiGroups: ["*"]
@@ -30,6 +32,8 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Viewing all secrets"
+    example: "kubectl get secrets -o yaml"
     namespace: default
     name: risky-list-secrets
     priority: CRITICAL
@@ -44,6 +48,8 @@ items:
 # Example: kubectl get secrets -o yaml
 - kind: Role
   metadata:
+    risk: "Impersonate privileged groups (like 'system:masters')"
+    example: kubectl get secrets -o yaml
     namespace: default
     name: risky-impersonate-groups
     priority: CRITICAL
@@ -56,6 +62,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use over all resources"
     namespace: default
     name: risky-any-verb
     priority: CRITICAL
@@ -70,6 +77,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use over secrets"
     namespace: default
     name: risky-any-verb-secrets
     priority: CRITICAL
@@ -80,6 +88,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over pods"
     namespace: default
     name: risky-any-verb-pods
     priority: CRITICAL
@@ -90,6 +99,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over deployement"
     namespace: default
     name: risky-any-verb-deployments
     priority: CRITICAL
@@ -100,6 +110,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over daemonsets"
     namespace: default
     name: risky-any-verb-daemonsets
     priority: CRITICAL
@@ -110,6 +121,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over statefulsets"
     namespace: default
     name: risky-any-verb-statefulsets
     priority: CRITICAL
@@ -120,6 +132,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over replicationcontrollers"
     namespace: default
     name: risky-any-verb-replicationcontrollers
     priority: CRITICAL
@@ -130,6 +143,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over replicasets"
     namespace: default
     name: risky-any-verb-replicasets
     priority: CRITICAL
@@ -140,6 +154,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over cronjobs"
     namespace: default
     name: risky-any-verb-cronjobs
     priority: CRITICAL
@@ -150,6 +165,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over jobs"
     namespace: default
     name: risky-any-verb-jobs
     priority: CRITICAL
@@ -160,6 +176,7 @@ items:
 
   - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over roles"
     namespace: default
     name: risky-any-verb-roles
     priority: CRITICAL
@@ -170,6 +187,7 @@ items:
 
   - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over clusterroles"
     namespace: default
     name: risky-any-verb-clusterroles
     priority: CRITICAL
@@ -180,6 +198,7 @@ items:
 
   - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over rolebindings"
     namespace: default
     name: risky-any-verb-rolebindings
     priority: CRITICAL
@@ -190,6 +209,7 @@ items:
 
   - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over clusterrolebindings"
     namespace: default
     name: risky-any-verb-clusterrolebindings
     priority: CRITICAL
@@ -200,6 +220,7 @@ items:
 
   - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over users"
     namespace: default
     name: risky-any-verb-users
     priority: CRITICAL
@@ -210,6 +231,7 @@ items:
 
   - kind: Role
   metadata:
+    risk: "Wildcard use for verbs over groups"
     namespace: default
     name: risky-any-verb-groups
     priority: CRITICAL
@@ -224,6 +246,7 @@ items:
 ######################### REGION - Any resource Roles #########################
 - kind: Role
   metadata:
+    risk: "Use of wildcard for 'delete' verb"
     namespace: default
     name: risky-any-resource-delete
     priority: CRITICAL
@@ -234,6 +257,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Use of wildcard for 'deletecollection' verb"
     namespace: default
     name: risky-any-resource-delete
     priority: CRITICAL
@@ -244,6 +268,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Use of wildcard for 'create' verb"
     namespace: default
     name: risky-any-resource-create
     priority: CRITICAL
@@ -254,6 +279,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Use of wildcard for 'list' verb"
     namespace: default
     name: risky-any-resource-list
     priority: CRITICAL
@@ -264,6 +290,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Use of wildcard for 'get' verb"
     namespace: default
     name: risky-any-resource-get
     priority: CRITICAL
@@ -274,6 +301,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Use of wildcard for 'impersonate' verb"
     namespace: default
     name: risky-any-resource-impersonate
     priority: CRITICAL
@@ -295,6 +323,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Privilege Escalation from Node/Proxy"
     namespace: default
     name: risky-execute-command-node-proxy
     priority: HIGH
@@ -309,6 +338,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-deployments
     priority: HIGH
@@ -323,6 +353,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-deployments
     priority: HIGH
@@ -337,6 +368,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-daemonsets
     priority: HIGH
@@ -351,6 +383,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-daemonsets
     priority: HIGH
@@ -365,6 +398,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-statefulsets
     priority: HIGH
@@ -379,6 +413,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-statefulsets
     priority: HIGH
@@ -393,6 +428,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-replicationcontrollers
     priority: HIGH
@@ -407,6 +443,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-replicationcontrollers
     priority: HIGH
@@ -421,6 +458,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-replicasets
     priority: HIGH
@@ -435,6 +473,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-replicasets
     priority: HIGH
@@ -449,6 +488,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-jobs
     priority: HIGH
@@ -464,6 +504,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-jobs
     priority: HIGH
@@ -478,6 +519,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to create a malicious pod"
     namespace: default
     name: risky-create-jobs
     priority: HIGH
@@ -493,6 +535,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing to update a malicious pod"
     namespace: default
     name: risky-update-jobs
     priority: HIGH
@@ -512,6 +555,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing creation of rolebinding and associate privileged role to itself"
     namespace: default
     name: risky-create-rolebinding-role
     priority: HIGH
@@ -536,6 +580,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing creation of rolebinding and associate privileged clusterrole to itself"
     namespace: default
     name: risky-create-rolebinding-clusterrole
     priority: HIGH
@@ -560,6 +605,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing creation of clusterrolebinding and associate privileged clusterrole to itself"
     namespace: default
     name: risky-create-clusterrolebinding-clusterrole
     priority: HIGH
@@ -579,6 +625,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing update of a malicious pod"
     namespace: default
     name: risky-create-pod
     priority: HIGH
@@ -599,6 +646,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Getting shell on pods"
     namespace: default
     name: risky-exec-pods
     priority: HIGH
@@ -623,6 +671,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Attaching pod and view all its logs in realtime"
     namespace: default
     name: risky-attach-pods
     priority: HIGH
@@ -646,6 +695,7 @@ items:
 
 - kind: Role
   metadata:
+    risk: "Allowing users in a rolebinding to add other users to their rolebindings"
     namespace: default
     name: risky-add-rolebinding
     priority: LOW
