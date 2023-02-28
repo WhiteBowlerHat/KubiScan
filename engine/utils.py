@@ -572,6 +572,7 @@ def search_subject_in_subjects(rolebinding, bindingkind):
         t_subject["rolekind"] = rolebinding.role_ref.kind
         t_subject["bindingname"] = rolebinding.metadata.name
         t_subject["bindingkind"] = bindingkind
+	t_subject["bindingnamespace"] = rolebinding.metadata.namespace
         t_subject["kind"] = subject.kind
         t_subject["name"] = subject.name
         t_subject["namespace"] = subject.namespace
@@ -607,13 +608,14 @@ def get_subjects_by_kind(kind):
     rolebindings = api_client.RbacAuthorizationV1Api.list_role_binding_for_all_namespaces()
     clusterrolebindings = api_client.api_temp.list_cluster_role_binding()
     for rolebinding in rolebindings.items:
+	print(rolebinding)
         if rolebinding.subjects is not None:
             subjects_found += search_subject_in_subjects_by_kind(rolebinding.subjects, kind)
 
     for clusterrolebinding in clusterrolebindings:
         if clusterrolebinding.subjects is not None:
             subjects_found += search_subject_in_subjects_by_kind(clusterrolebinding.subjects, kind)
-    print(subjects_found)
+    
     return remove_duplicated_subjects(subjects_found)
 
 
