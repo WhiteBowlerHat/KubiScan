@@ -108,7 +108,8 @@ def is_risky_role_with_risk(role):
     priority = Priority.LOW
     risk = "None"
     for risky_role in STATIC_RISKY_ROLES:
-        if are_rules_contain_other_rules(role.metadata.name, role.rules, risky_role.rules):
+        if role is not None:
+          if are_rules_contain_other_rules(role.metadata.name, role.rules, risky_role.rules):
             is_risky = True
             priority = risky_role.priority
             risk = risky_role.risk
